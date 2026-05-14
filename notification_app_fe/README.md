@@ -1,16 +1,62 @@
-# React + Vite
+# Campus Notification Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack campus notification platform where students receive real-time updates on **Placements**, **Events**, and **Results**.
 
-Currently, two official plugins are available:
+## Screenshots
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Dashboard — All Notifications
+![Dashboard](../screenshots/ui_full.png)
 
-## React Compiler
+### Priority Inbox
+![Priority Inbox](../screenshots/priority_inbox.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Placement Filter
+![Placement Tab](../screenshots/placement_tab.png)
 
-## Expanding the ESLint configuration
+### Create Notification
+![Create Modal](../screenshots/create_modal.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+
+- **Frontend**: React 19, Vite, Vanilla CSS
+- **Backend**: Node.js, Express
+- **Real-time**: Server-Sent Events (SSE)
+- **Logging**: Custom middleware → Afford Medical evaluation service
+
+## Features
+
+- 🔴 **Priority Inbox** — unread high-priority notifications surfaced at the top
+- 🗂️ **Tabbed filtering** — All / Placement / Event / Result with live counts
+- ⚡ **Real-time SSE** — new notifications push instantly without polling
+- ✏️ **Create notifications** — type, priority, title, message
+- ✓ **Mark read / delete** — per-card and bulk actions
+- 📋 **Logging middleware** — every request/response logged to evaluation service
+
+## Running Locally
+
+```bash
+# Backend (port 3000)
+cd notification_app_be
+npm install
+npm run dev
+
+# Frontend (port 5173)
+cd notification_app_fe
+npm install
+npm run dev
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/notifications` | List with filter & pagination |
+| GET | `/api/notifications/priority-inbox` | Unread high-priority |
+| GET | `/api/notifications/stream` | SSE real-time stream |
+| POST | `/api/notifications` | Create notification |
+| PATCH | `/api/notifications/read-all` | Mark all as read |
+| GET | `/api/notifications/:id` | Get single |
+| PATCH | `/api/notifications/:id/read` | Mark read/unread |
+| DELETE | `/api/notifications/:id` | Delete |
